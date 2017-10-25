@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:03:19 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/25 18:05:18 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/25 20:35:49 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,21 @@ int			ft_key_hook(int keycode, void *param);
 int			ft_expose_hook(int keycode, void *param);
 int			ft_mouse_hook(int keycode, void *param);
 
-// typedef struct s_env	t_env;
-// typedef struct s_map	t_map;
+typedef struct s_env	t_env;
+typedef struct s_pts	t_pts;
 
-// struct s_env
-// {
-// 	void		*mlx;
-// 	void		*win;
-// 	t_map		*map;
-// };
-//
-// struct s_map
-// {
-// 	int			x;
-// 	int			y;
-// 	int			z;
-// 	map[x][y]
-// }
+struct s_env
+{
+	void		*mlx;
+	void		*win;
+	t_pts		*pts;
+};
+
+struct s_pts
+{
+	int			x;
+	int			y;
+	int			z;
+}
 
 #endif
