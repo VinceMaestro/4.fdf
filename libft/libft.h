@@ -141,6 +141,7 @@ void		ft_foreach(int *tab, int lenght, void (*f)(int));
 int			ft_count_if(char **tab, int (*f)(char*));
 int			ft_min(int a, int b);
 int			ft_max(int a, int b);
+float		ft_fltmax(float a, float b);
 t_ll		ft_abs(t_ll num);
 size_t		ft_intlen(int nbr);
 size_t		ft_lintlen(long nbr);
@@ -150,5 +151,6 @@ int			ft_power(int x, int n);
 long long	ft_llpower(long long x, long long n);
 int			ft_put_llnbr(long long nbr);
 int			ft_put_ullnbr(unsigned long long nbr);
+int			ft_get_arr_len(char **args);
 
 #endif

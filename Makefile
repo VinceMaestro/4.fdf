@@ -1,38 +1,48 @@
-NAME = libfdf.a
+NAME = fdf
 
 C_FLAGS = -Wall -Wextra -Werror
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
-SRC = fdf.c \
+SRC = main.c \
+		fdf.c \
+		ft_get_dim.c \
+		ft_get_pts.c \
+		ft_project.c \
+		get_next_line.c \
+		ft_draw_all_lines.c \
+		dbug_pmap.c \
 		ft_key_hook.c \
-		ft_mouse_hook.c \
-		ft_expose_hook.c
+		ft_mouse_hook.c
 
-LIBDIR = ./libft
+SRCS = $(addprefix ./src/, $(SRC))
+OBJS = $(addprefix ./src/, $(SRC:.c=.o))
 
-OBJ = $(SRC:.c=.o)
+LIBFT = -L./libft -lft
 
-INCL = $(LIBDIR) \
-		./
+LIBFT_PATH = ./libft
+
+MLX_PATH = ./mlx
+
 all: $(NAME)
 
-$(LIBDIR)/libft.a:
-	make -C $(LIBDIR)
+$(OBJS): $(SRCS)
+	gcc $(C_FLAGS) -c $< -o $@
 
-%.o:%.c1
-	gcc $(C_FLAGS) -c $< -o mlx $@ -g $(addprefix -I, $(INCL)) $(MLX_FLAGS)
-
-$(NAME): $(OBJ) | $(LIBDIR)/libft.a
-	cp $(LIBDIR)/libft.a $(NAME)
-	ar -rc $(NAME) $(OBJ)
+$(NAME):$(OBJS)
+	make -C $(LIBFT_PATH)
+	make -C $(MLX_PATH)
+	gcc $(C_FLAGS) -o $(NAME) $(SRCS) $(MLX_FLAGS) $(LIBFT)
 
 clean:
-	/bin/rm -f $(OBJ)
-	make -C $(LIBDIR) clean
+	rm -rf $(OBJS)
+	make -C $(LIBFT_PATH) clean
+	make -C $(MLX_PATH) clean
 
 fclean: clean
-	/bin/rm -f $(NAME)
-	/bin/rm -f $(LIBDIR)/libft.a
+	rm -rf $(NAME)
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re

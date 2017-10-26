@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
-int			ft_is_valid(int open_fd, t_env *env)
+int			ft_get_dim(int fd, t_env *env)
 {
 	char		*line;
 	char		**args;
-	int			err;
-	int			;
-	int			len;
+	int			tmp;
 
-	err = 0;
 	line = NULL;
-	len = 0;
-	while (get_next_line(open_fd, &line) && !err)
+	env->dim = (t_dim*)malloc(sizeof(t_dim));
+	env->dim->h = 0;
+	env->dim->w = 0;
+	while (get_next_line(fd, &line))
 	{
 		args = ft_strsplit(line, ' ');
 		ft_strdel(&line);
-		err = ft_arr_str_to_arr_int();
-		len++;
+		tmp = ft_get_arr_len(args);
+		env->dim->w = ft_max(env->dim->w, tmp);
+		env->dim->h++;
 	}
-
+	return (env->dim->h && env->dim->w ? VALID : INVALID);
 }

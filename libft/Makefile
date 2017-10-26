@@ -96,6 +96,7 @@ SRC = ft_atoi \
 		ft_foreach \
 		ft_count_if \
 		ft_max \
+		ft_fltmax \
 		ft_min \
 		ft_abs \
 		ft_intlen \
@@ -103,20 +104,21 @@ SRC = ft_atoi \
 		ft_llintlen \
 		ft_ullintlen \
 		ft_power \
-		ft_llpower
+		ft_llpower \
+		ft_get_arr_len
 
 INCL = libft
 
 all: $(NAME)
 
 $(NAME): $(foreach element,$(SRC), $(SRC_DIR)/$(element).c)
-	@gcc -Wall -Werror -Wextra -c $^ -I$(INCL_DIR)
-	@ar -rc $@ $(foreach element,$(SRC), $(element).o)
+	gcc -Wall -Werror -Wextra -c $^ -I$(INCL_DIR)
+	ar -rc $@ $(foreach element,$(SRC), $(element).o)
 
 clean:
-	@/bin/rm -f $(foreach element,$(SRC), $(element).o)
+	/bin/rm -f $(foreach element,$(SRC), $(element).o)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all

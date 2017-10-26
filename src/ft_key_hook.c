@@ -11,14 +11,43 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "fdf.h"
+#include "../include/fdf.h"
 
 #include <stdio.h>
 
-int		ft_key_hook(int keycode, void *param)
+static u_int16_t	get_zoom(int k)
 {
-	printf("key event %d\n", keycode);
-	if (keycode == 53)
+	if (k == K_ZOOM1)
+		return (OP_ZOOM1);
+	if (k == K_ZOOM2)
+		return (OP_ZOOM2);
+	if (k == K_ZOOM3)
+		return (OP_ZOOM3);
+	if (k == K_ZOOM4)
+		return (OP_ZOOM4);
+	if (k == K_ZOOM5)
+		return (OP_ZOOM5);
+	if (k == K_ZOOM6)
+		return (OP_ZOOM6);
+	if (k == K_ZOOM7)
+		return (OP_ZOOM7);
+	return (OP_ZOOM0);
+}
+
+int					ft_key_hook(int k, t_env *env)
+{
+	if (env)
+		printf("key event %d\n", k);
+	if (k == K_ESC)
+	{
+		mlx_destroy_window(env->mlx, env->win);
 		exit(0);
+	}
+	else if (k >= K_ZOOM0 && k <= K_ZOOM7)
+	{
+		mlx_clear_window(env->mlx, env->win);
+		ft_project(env, get_zoom(k));
+		ft_draw_all_lines(env);
+	}
 	return (0);
 }

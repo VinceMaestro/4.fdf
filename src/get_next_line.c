@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 static t_gnl_list	*ft_read_next(t_gnl_list *fd_lst)
 {

@@ -10,24 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
-// gcc -o mlx main.c -lmlx -framework OpenGL -framework AppKit
-
-void		fdf(int open_fd, t_env *env)
+void		fdf(int fd, t_env *env)
 {
+	u_int16_t	options;
+
+	options = OP_ZOOM0;
+	if (!fd)
+		return ;
 	env->mlx = mlx_init();
-	env->win = mlx_new_window(mlx, 400, 400, "mlx 42");
+	env->win = mlx_new_window(env->mlx, WIN_W, WIN_H, "mlx 42");
+	ft_project(env, options);
+	ft_draw_all_lines(env);
 
-
-
-
-
-	// mlx_pixel_put(mlx, win, x++, y, 0x00AAAAAA);
-
-	mlx_key_hook(win, ft_key_hook, 0); // Keyboard Input
-	mlx_mouse_hook(win, ft_mouse_hook, 0); // Mouse Input
-	mlx_expose_hook(win, ft_expose_hook, 0); // Display
-	// mlx_loop_hook(win, ft_loop_hook, 0); // Quand rien a faire?
-	mlx_loop(mlx);
+	mlx_key_hook(env->win, ft_key_hook, (void*)env); // Keyboard Input
+	mlx_mouse_hook(env->win, ft_mouse_hook, (void*)env); // Mouse Input
+	// mlx_loop_hook(env->win, ft_loop_hook, 0); // Quand rien a faire?
+	mlx_loop(env->mlx);
 }
