@@ -53,7 +53,7 @@
 # define R_COL		0x00FF0000
 # define G_COL		0x0000FF00
 # define B_COL		0x000000FF
-# define PINK_COL	0x00FFAAAF
+# define PINK_COL	0x00FF1CAE
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
