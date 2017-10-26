@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:01:49 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/25 20:38:41 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/26 13:59:17 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		fdf(int fd, t_env *env)
 		return ;
 	env->zoom = DEF_ZOOM;
 	env->color = DEF_COL;
+	env->x_off = 0;
+	env->y_off = 0;
 	env->mlx = mlx_init();
 	env->win = mlx_new_window(env->mlx, WIN_W, WIN_H, "mlx 42");
 	ft_project(env);

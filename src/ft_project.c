@@ -2,20 +2,28 @@
 
 #include <stdio.h>
 
-static float	ft_calc_proj_x(float x, float y, u_int16_t zoom, int w)
+static float	ft_calc_proj_x(float x, float y, t_env *env)
 {
-	float	   ret;
+	int			w;
+	float		ret;
+	u_int16_t	zoom;
 
-	ret = (0.7 * x - 0.7 * y) * zoom + ((WIN_W - w) / 2);
+	w = env->dim->w;
+	zoom = env->zoom;
+	ret = (0.7 * x - 0.7 * y) * zoom + ((WIN_W - w) / 2) + 100 * env->x_off;
 	return (ret);
 }
 
-static float	ft_calc_proj_y(float x, float y, float z, u_int16_t zoom, \
-	int h)
+static float	ft_calc_proj_y(float x, float y, float z, t_env *env)
 {
-	float	   ret;
+	int			h
+	float		ret;
+	u_int16_t	zoom;
 
-	ret = -1 * (0.82 * z - 0.41 * (x + y)) * zoom + ((WIN_H - h) / 2);
+	h = env->dim->h;
+	zoom = env->zoom;
+	ret = -1 * (0.82 * z - 0.41 * (x + y)) * zoom + ((WIN_H - h) / 2) + \
+		100 * env->x_off;
 	return (ret);
 }
 
@@ -29,9 +37,9 @@ void		   	ft_project(t_env *env)
 		while (!env->pts[i].last)
 		{
 			env->pts[i].x_proj = ft_calc_proj_x(env->pts[i].x, env->pts[i].y, \
-				env->zoom, env->dim->w);
+				env->dim->w);
 			env->pts[i].y_proj = ft_calc_proj_y(env->pts[i].x, \
-				env->pts[i].y, env->pts[i].z, env->zoom, env->dim->h);
+				env->pts[i].y, env->pts[i].z, env->dim->h);
 			mlx_pixel_put(env->mlx, env->win, env->pts[i].x_proj, \
 				env->pts[i].y_proj, env->color);// + get_hex(env->pts[i].z)
 			i++;
