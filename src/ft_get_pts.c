@@ -12,14 +12,14 @@ static void		ft_get_xyz_pos(char **args, t_env *env, int h)
 	while (args[i] && !(env->pts[(h * mod) + i].last))
 	{
 		env->pts[(h * mod) + i].x = i;
-		env->pts[(h * mod) + i].y = mod;
+		env->pts[(h * mod) + i].y = h;
 		env->pts[(h * mod) + i].z = ft_atoi(args[i]);
 		i++;
 	}
 	while (i < mod)
 	{
 		env->pts[(h * mod) + i].x = i;
-		env->pts[(h * mod) + i].y = mod;
+		env->pts[(h * mod) + i].y = h;
 		env->pts[(h * mod) + i].z = 0;
 		i++;
 	}
