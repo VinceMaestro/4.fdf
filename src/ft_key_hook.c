@@ -36,6 +36,9 @@ static u_int16_t	get_zoom(int k)
 
 int					ft_key_hook(int k, t_env *env)
 {
+	int			modif;
+
+	modif = 0;
 	if (env)
 		printf("key event %d\n", k);
 	if (k == K_ESC || k == K_QUIT)
@@ -43,7 +46,7 @@ int					ft_key_hook(int k, t_env *env)
 		mlx_destroy_window(env->mlx, env->win);
 		exit(0);
 	}
-	if (k == K_COL_R || k == K_COL_G || k == K_COL_B)
+	if (k == K_COL_R || k == K_COL_G || k == K_COL_B || k == K_COL_PINK)
 	{
 		if (k == K_COL_R)
 			env->color = R_COL;
@@ -51,14 +54,26 @@ int					ft_key_hook(int k, t_env *env)
 			env->color = G_COL;
 		else if (k == K_COL_B)
 			env->color = B_COL;
-		mlx_clear_window(env->mlx, env->win);
-		ft_project(env);
-		ft_draw_all_lines(env);
+		else if (k == K_COL_PINK)
+			env->color = PINK_COL;
+		modif++;
 	}
 	if (k >= K_ZOOM0 && k <= K_ZOOM7)
 	{
-		mlx_clear_window(env->mlx, env->win);
 		env->zoom = get_zoom(k);
+		modif++;
+	}
+	if (k == K_LEFT || k == K_RIGHT || k == K_UP || k == K_DOWN)
+	{
+		if (k == K_LEFT || k == K_RIGHT)
+			env->x_off += k == K_RIGHT ? 1 : -1;
+		if (k == K_UP || k == K_DOWN)
+			env->y_off += k == K_UP ? 1 : -1;
+		modif++;
+	}
+	if (modif)
+	{
+		mlx_clear_window(env->mlx, env->win);
 		ft_project(env);
 		ft_draw_all_lines(env);
 	}

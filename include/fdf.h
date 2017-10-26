@@ -18,6 +18,8 @@
 # define K_COL_R	15
 # define K_COL_G	5
 # define K_COL_B	11
+# define K_COL_PINK	35
+
 # define K_ZOOM0	18
 # define K_ZOOM1	19
 # define K_ZOOM2	20
@@ -26,10 +28,15 @@
 # define K_ZOOM5	22
 # define K_ZOOM6	26
 # define K_ZOOM7	28
+# define K_LEFT		123
+# define K_RIGHT	124
+# define K_UP		125
+# define K_DOWN		126
+
 # define VALID		1
 # define INVALID	-1
-# define WIN_W		1920
-# define WIN_H		1080
+# define WIN_W		1080
+# define WIN_H		720
 
 # define OP_ZOOM0	(1 << 0)
 # define OP_ZOOM1	(1 << 1)
@@ -46,6 +53,7 @@
 # define R_COL		0x00FF0000
 # define G_COL		0x0000FF00
 # define B_COL		0x000000FF
+# define PINK_COL	0x00FFAAAF
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
