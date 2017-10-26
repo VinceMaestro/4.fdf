@@ -38,15 +38,28 @@ int					ft_key_hook(int k, t_env *env)
 {
 	if (env)
 		printf("key event %d\n", k);
-	if (k == K_ESC)
+	if (k == K_ESC || k == K_QUIT)
 	{
 		mlx_destroy_window(env->mlx, env->win);
 		exit(0);
 	}
-	else if (k >= K_ZOOM0 && k <= K_ZOOM7)
+	if (k == K_COL_R || k == K_COL_G || k == K_COL_B)
+	{
+		if (k == K_COL_R)
+			env->color = R_COL;
+		else if (k == K_COL_G)
+			env->color = G_COL;
+		else if (k == K_COL_B)
+			env->color = B_COL;
+		mlx_clear_window(env->mlx, env->win);
+		ft_project(env);
+		ft_draw_all_lines(env);
+	}
+	if (k >= K_ZOOM0 && k <= K_ZOOM7)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		ft_project(env, get_zoom(k));
+		env->zoom = get_zoom(k);
+		ft_project(env);
 		ft_draw_all_lines(env);
 	}
 	return (0);

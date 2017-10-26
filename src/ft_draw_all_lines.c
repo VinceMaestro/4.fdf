@@ -26,7 +26,7 @@ static void		draw_right_line(t_env *env, t_inf_line *inf)
 			inf->sum -= inf->dx;
 			inf->y += inf->yinc;
 		}
-		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, DEF_COL);
+		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, env->color);
 		i++;
 	}
 }
@@ -45,7 +45,7 @@ static void		draw_down_line(t_env *env, t_inf_line *inf)
 			inf->sum -= inf->dy;
 			inf->x += inf->xinc;
 		}
-		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, DEF_COL);
+		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, env->color);
 		i++;
 	}
 }

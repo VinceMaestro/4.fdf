@@ -47,6 +47,5 @@ int				ft_get_pts(int fd, t_env *env)
 		ft_get_xyz_pos(args, env, h);
 		h++;
 	}
-	dbug_pmap(env);
 	return (VALID);
 }

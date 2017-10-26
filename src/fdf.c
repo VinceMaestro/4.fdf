@@ -14,14 +14,13 @@
 
 void		fdf(int fd, t_env *env)
 {
-	u_int16_t	options;
-
-	options = OP_ZOOM0;
 	if (!fd)
 		return ;
+	env->zoom = DEF_ZOOM;
+	env->color = DEF_COL;
 	env->mlx = mlx_init();
 	env->win = mlx_new_window(env->mlx, WIN_W, WIN_H, "mlx 42");
-	ft_project(env, options);
+	ft_project(env);
 	ft_draw_all_lines(env);
 
 	mlx_key_hook(env->win, ft_key_hook, (void*)env); // Keyboard Input

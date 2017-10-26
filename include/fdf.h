@@ -14,6 +14,10 @@
 # define FDF_H
 
 # define K_ESC		53
+# define K_QUIT		12
+# define K_COL_R	15
+# define K_COL_G	5
+# define K_COL_B	11
 # define K_ZOOM0	18
 # define K_ZOOM1	19
 # define K_ZOOM2	20
@@ -36,9 +40,12 @@
 # define OP_ZOOM6	(1 << 6)
 # define OP_ZOOM7	(1 << 7)
 
-# define DEFAULT	OP_ZOOM0
+# define DEF_ZOOM	OP_ZOOM0
 
 # define DEF_COL	0x002DC6C0
+# define R_COL		0x00FF0000
+# define G_COL		0x0000FF00
+# define B_COL		0x000000FF
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
@@ -56,6 +63,8 @@ struct s_env
 	void		*win;
 	t_pts		*pts;
 	t_dim		*dim;
+	int			color;
+	int			zoom;
 };
 
 struct s_dim
@@ -94,6 +103,6 @@ int			ft_mouse_hook(int keycode, t_env *env);
 int			ft_get_dim(int fd, t_env *env);
 int			ft_get_pts(int fd, t_env *env);
 void		ft_draw_all_lines(t_env *env);
-void		ft_project(t_env *env, u_int16_t options);
+void		ft_project(t_env *env);
 
 #endif
