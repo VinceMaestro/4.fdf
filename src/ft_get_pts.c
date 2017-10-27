@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 17:29:40 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 17:29:40 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/27 21:08:16 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				ft_get_pts(int fd, t_env *env)
 	char		*line;
 	char		**args;
 	int			total;
+	int			err;
 	int			h;
 
 	line = NULL;
@@ -52,12 +53,14 @@ int				ft_get_pts(int fd, t_env *env)
 	env->pts[total].last = 1;
 	while (--total >= 0)
 		env->pts[total].last = 0;
-	while (get_next_line(fd, &line))
+	while ((err = get_next_line(fd, &line)) > 0)
 	{
 		args = ft_strsplit(line, ' ');
 		ft_strdel(&line);
 		ft_get_xyz_pos(args, env, h);
 		h++;
 	}
+	if (err == -1)
+		ft_error("usage: ./fdf source_file\n");
 	return (VALID);
 }

@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:03:19 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 19:05:43 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/28 00:14:25 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ struct		s_env
 	t_pts		*pts;
 	t_dim		*dim;
 	int			color;
-	int			zoom;
-	int			delta_x;
-	int			delta_y;
-	int			x_off;
-	int			y_off;
+	float		zoom;
+	float		delta_x;
+	float		delta_y;
+	float		x_off;
+	float		y_off;
 };
 
 struct		s_dim

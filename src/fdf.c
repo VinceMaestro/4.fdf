@@ -6,28 +6,30 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:01:49 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 19:31:48 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/28 00:51:34 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+#include <stdio.h>
+
 static void			get_deltas(t_env *env)
 {
-	int		i;
-	int		max_y;
-	int		min_y;
+	int			i;
+	float		max_y;
+	float		min_y;
 
 	i = -1;
 	env->delta_y = 0;
-	min_y = (int)env->pts[0].y_proj;
-	max_y = (int)env->pts[0].y_proj;
+	min_y = env->pts[0].y_proj;
+	max_y = env->pts[0].y_proj;
 	while (!env->pts[++i].last)
 	{
-		min_y = (int)env->pts[i].y_proj < min_y ? \
-			(int)env->pts[i].y_proj : min_y;
-		max_y = (int)env->pts[i].y_proj > max_y ? \
-			(int)env->pts[i].y_proj : max_y;
+		min_y = env->pts[i].y_proj < min_y ? \
+			env->pts[i].y_proj : min_y;
+		max_y = env->pts[i].y_proj > max_y ? \
+			env->pts[i].y_proj : max_y;
 	}
 	if (max_y > min_y)
 		env->delta_y = max_y - min_y;
@@ -72,8 +74,21 @@ void				fdf(t_env *env)
 	ft_project(env);
 	get_deltas(env);
 	env->zoom = get_def_zoom(env);
-	env->x_off = (WIN_W / 2 - env->delta_x);
-	env->y_off = (WIN_H / 2 - env->delta_y);
+	ft_project(env);
+	get_deltas(env);
+
+	float	tmp_y_end;
+	float	tmp_y_first;
+
+	tmp_y_end = (-0.41 * (env->pts[env->dim->w * env->dim->h - 1].x + env->pts[env->dim->w * env->dim->h - 1].y)) * env->zoom;
+	tmp_y_first = (-0.41 * (env->pts[0].x + env->pts[0].y)) * env->zoom;
+	env->x_off = (WIN_W - env->delta_x) / 2;
+	env->y_off = (WIN_H - env->delta_y + (tmp_y_first - tmp_y_end)) / 2;
+
+	printf("WIN_H = %i\nenv->delta_y = %f\nenv->zoom = %f\nenv->x_off = %f\nenv->y_off = %f\ntmp_y_end = %f\ntmp_y_first = %f\n", WIN_H, env->delta_y, env->zoom, env->x_off, env->y_off, tmp_y_end, tmp_y_first);
+
+	// env->x_off = WIN_W / 2 - (((env->pts[env->dim->w].x_proj - env->pts[env->dim->w * (env->dim->h - 1)].x_proj) * env->zoom) / 2);
+	// env->y_off = (WIN_H / 2) - (((env->pts[env->dim->w * env->dim->h - 1].y_proj - env->pts[0].y_proj) / 2) * env->zoom) + ((env->delta_y * env->zoom) / 2);// - ( / 2 * env->zoom);
 	ft_project(env);
 	ft_draw_all_lines(env);
 	mlx_key_hook(env->win, ft_key_hook, (void*)env);
