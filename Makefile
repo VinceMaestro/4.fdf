@@ -11,9 +11,7 @@ SRC = main.c \
 		ft_project.c \
 		get_next_line.c \
 		ft_draw_all_lines.c \
-		dbug_pmap.c \
-		ft_key_hook.c \
-		ft_mouse_hook.c
+		ft_key_hook.c
 
 SRCS = $(addprefix ./src/, $(SRC))
 OBJS = $(addprefix ./src/, $(SRC:.c=.o))

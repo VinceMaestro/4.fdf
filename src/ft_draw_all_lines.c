@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw_all_lines.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/27 17:29:49 by vpetit            #+#    #+#             */
+/*   Updated: 2017/10/27 17:58:44 by vpetit           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/fdf.h"
 
 static void		init_inf_line(t_inf_line *inf, t_env *env, int i, int j)
@@ -56,14 +68,13 @@ static void		draw_one_line(t_env *env, int i, int j)
 
 	init_inf_line(&inf, env, i, j);
 	inf.sum = ft_fltmax(inf.dx, inf.dy) / 2;
-
 	if (inf.dx > inf.dy && j < env->dim->w * env->dim->h)
 		draw_right_line(env, &inf);
 	else
 		draw_down_line(env, &inf);
 }
 
-void		ft_draw_all_lines(t_env *env)
+void			ft_draw_all_lines(t_env *env)
 {
 	int		total;
 	int		tmp;
@@ -74,8 +85,10 @@ void		ft_draw_all_lines(t_env *env)
 	total = env->dim->h * env->dim->w;
 	while (!env->pts[i].last)
 	{
+		mlx_pixel_put(env->mlx, env->win, env->pts[i].x_proj, \
+			env->pts[i].y_proj, env->color);
 		tmp = (int)env->pts[i].x;
-		if ((tmp  + 1 )% env->dim->w)
+		if ((tmp + 1) % env->dim->w)
 			draw_one_line(env, i, i + 1);
 		tmp = (int)env->pts[i].y;
 		if (i < total - env->dim->w)

@@ -1,3 +1,5 @@
+#include "../include/fdf.h"
+
 #include <stdio.h>
 
 void			dbug_pinf(t_inf_line *inf)

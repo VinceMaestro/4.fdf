@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_arr_len.c                                   :+:      :+:    :+:   */
+/*   ft_base_atol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/27 17:40:18 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 17:40:19 by vpetit           ###   ########.fr       */
+/*   Created: 2017/10/27 16:20:42 by vpetit            #+#    #+#             */
+/*   Updated: 2017/10/27 16:35:56 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_get_arr_len(char **args)
+long		ft_base_atol(char *str, char *base)
 {
-	int		len;
+	int		base_len;
+	long	nbr;
+	int		i;
+	char	*pos;
 
-	len = 0;
-	if (!args)
+	i = 0;
+	nbr = 0;
+	pos = NULL;
+	base_len = ft_strlen(base);
+	if (!str || !base)
 		return (0);
-	while (args[len])
-		len++;
-	return (len);
+	while (str[i] && (pos = ft_strchr(base, str[i])))
+		nbr += (pos - base) * ft_llpower(base_len, i);
+	return (pos ? nbr : 0);
 }

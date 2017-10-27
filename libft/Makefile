@@ -6,7 +6,7 @@
 #    By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/18 21:24:23 by vpetit            #+#    #+#              #
-#    Updated: 2017/10/24 13:57:52 by vpetit           ###   ########.fr        #
+#    Updated: 2017/10/27 16:33:42 by vpetit           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_DIR = .
 INCL_DIR = .
 
 SRC = ft_atoi \
+		ft_base_atol \
 		ft_malloc \
 		ft_error \
 		ft_bzero \
@@ -97,6 +98,7 @@ SRC = ft_atoi \
 		ft_count_if \
 		ft_max \
 		ft_fltmax \
+		ft_fltmin \
 		ft_min \
 		ft_abs \
 		ft_intlen \

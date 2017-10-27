@@ -1,6 +1,16 @@
-#include "../include/fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_project.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/26 21:48:05 by vpetit            #+#    #+#             */
+/*   Updated: 2017/10/27 19:13:12 by vpetit           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "../include/fdf.h"
 
 static float	ft_calc_proj_x(float x, float y, t_env *env)
 {
@@ -10,7 +20,7 @@ static float	ft_calc_proj_x(float x, float y, t_env *env)
 
 	w = env->dim->w;
 	zoom = env->zoom;
-	ret = (0.7 * x - 0.7 * y) * zoom + ((WIN_W - w) / 2) + 100 * env->x_off;
+	ret = (0.7 * x - 0.7 * y) * zoom + env->x_off;
 	return (ret);
 }
 
@@ -22,12 +32,11 @@ static float	ft_calc_proj_y(float x, float y, float z, t_env *env)
 
 	h = env->dim->h;
 	zoom = env->zoom;
-	ret = -1 * (0.82 * z - 0.41 * (x + y)) * zoom + ((WIN_H - h) / 2) + \
-		100 * env->y_off;
+	ret = (0.82 * z - 0.41 * (x + y)) * -zoom + env->y_off;
 	return (ret);
 }
 
-void		   	ft_project(t_env *env)
+void			ft_project(t_env *env)
 {
 	int			i;
 
@@ -40,8 +49,6 @@ void		   	ft_project(t_env *env)
 				env);
 			env->pts[i].y_proj = ft_calc_proj_y(env->pts[i].x, \
 				env->pts[i].y, env->pts[i].z, env);
-			mlx_pixel_put(env->mlx, env->win, env->pts[i].x_proj, \
-				env->pts[i].y_proj, env->color);// + get_hex(env->pts[i].z)
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 17:07:18 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/24 15:54:45 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/27 16:33:26 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char		*ft_strnstr(const char *big, const char *little, size_t len);
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *str);
+long		ft_base_atol(char *str, char *base);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
@@ -142,6 +143,7 @@ int			ft_count_if(char **tab, int (*f)(char*));
 int			ft_min(int a, int b);
 int			ft_max(int a, int b);
 float		ft_fltmax(float a, float b);
+float		ft_fltmin(float a, float b);
 t_ll		ft_abs(t_ll num);
 size_t		ft_intlen(int nbr);
 size_t		ft_lintlen(long nbr);

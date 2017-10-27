@@ -6,19 +6,27 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:03:19 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/26 13:58:36 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/27 19:05:43 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FDF_H
+#ifndef FDF_H
 # define FDF_H
+
+# define WIN_W		1720
+# define WIN_H		1080
 
 # define K_ESC		53
 # define K_QUIT		12
-# define K_COL_R	15
-# define K_COL_G	5
-# define K_COL_B	11
-# define K_COL_PINK	35
+
+# define K_DEF_COL	2
+# define K_R_COL	15
+# define K_G_COL	5
+# define K_B_COL	11
+# define K_PINK_COL	35
+
+# define K_ZOOM_IN	4
+# define K_ZOOM_OUT	5
 
 # define K_ZOOM0	18
 # define K_ZOOM1	19
@@ -27,16 +35,14 @@
 # define K_ZOOM4	23
 # define K_ZOOM5	22
 # define K_ZOOM6	26
-# define K_ZOOM7	28
+
 # define K_LEFT		123
 # define K_RIGHT	124
-# define K_UP		125
-# define K_DOWN		126
+# define K_UP		126
+# define K_DOWN		125
 
 # define VALID		1
 # define INVALID	-1
-# define WIN_W		1080
-# define WIN_H		720
 
 # define OP_ZOOM0	(1 << 0)
 # define OP_ZOOM1	(1 << 1)
@@ -45,11 +51,10 @@
 # define OP_ZOOM4	(1 << 4)
 # define OP_ZOOM5	(1 << 5)
 # define OP_ZOOM6	(1 << 6)
-# define OP_ZOOM7	(1 << 7)
 
-# define DEF_ZOOM	OP_ZOOM0
+# define DEF_ZOOM	(1 << 0)
 
-# define DEF_COL	0x002DC6C0
+# define DEF_COL	0x007F0080
 # define R_COL		0x00FF0000
 # define G_COL		0x0000FF00
 # define B_COL		0x000000FF
@@ -65,7 +70,7 @@ typedef struct s_pts		t_pts;
 typedef struct s_dim		t_dim;
 typedef struct s_inf_line	t_inf_line;
 
-struct s_env
+struct		s_env
 {
 	void		*mlx;
 	void		*win;
@@ -73,17 +78,19 @@ struct s_env
 	t_dim		*dim;
 	int			color;
 	int			zoom;
+	int			delta_x;
+	int			delta_y;
 	int			x_off;
 	int			y_off;
 };
 
-struct s_dim
+struct		s_dim
 {
 	int		w;
 	int		h;
 };
 
-struct s_pts
+struct		s_pts
 {
 	float			x;
 	float			y;
@@ -93,7 +100,7 @@ struct s_pts
 	float			last;
 };
 
-struct s_inf_line
+struct		s_inf_line
 {
 	float			x;
 	float			y;
@@ -104,12 +111,8 @@ struct s_inf_line
 	float			sum;
 };
 
-void		dbug_pmap(t_env *env);
-void		dbug_pinf(t_inf_line *inf);
-
-void		fdf(int fd, t_env *env);
+void		fdf(t_env *env);
 int			ft_key_hook(int k, t_env *env);
-int			ft_mouse_hook(int keycode, t_env *env);
 int			ft_get_dim(int fd, t_env *env);
 int			ft_get_pts(int fd, t_env *env);
 void		ft_draw_all_lines(t_env *env);
