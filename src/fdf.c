@@ -33,8 +33,9 @@ static void			get_deltas(t_env *env)
 	}
 	if (max_y > min_y)
 		env->delta_y = max_y - min_y;
-	env->delta_x = env->pts[env->dim->w].x - \
-		env->pts[env->dim->w * (env->dim->h - 1)].x;
+	printf("min_y = %f\nmax_y = %f\n", min_y, max_y);
+	// env->delta_x = env->pts[env->dim->w].x - \
+	// 	env->pts[env->dim->w * (env->dim->h - 1)].x;
 }
 
 static int			get_def_zoom(t_env *env)
@@ -63,6 +64,8 @@ static int			get_def_zoom(t_env *env)
 
 void				fdf(t_env *env)
 {
+	float	tmp_y_end;
+
 	if (!env)
 		ft_error("Error\n");
 	env->zoom = OP_ZOOM0;
@@ -77,18 +80,11 @@ void				fdf(t_env *env)
 	ft_project(env);
 	get_deltas(env);
 
-	float	tmp_y_end;
-	float	tmp_y_first;
-
 	tmp_y_end = (-0.41 * (env->pts[env->dim->w * env->dim->h - 1].x + env->pts[env->dim->w * env->dim->h - 1].y)) * env->zoom;
-	tmp_y_first = (-0.41 * (env->pts[0].x + env->pts[0].y)) * env->zoom;
-	env->x_off = (WIN_W - env->delta_x) / 2;
-	env->y_off = (WIN_H - env->delta_y + (tmp_y_first - tmp_y_end)) / 2;
+	env->x_off = ((float)WIN_W - env->dim->w * 0.5 * env->zoom) / 2;
+	env->y_off = ((float)WIN_H - (env->delta_y - tmp_y_end) / env->zoom) / 2;
 
-	printf("WIN_H = %i\nenv->delta_y = %f\nenv->zoom = %f\nenv->x_off = %f\nenv->y_off = %f\ntmp_y_end = %f\ntmp_y_first = %f\n", WIN_H, env->delta_y, env->zoom, env->x_off, env->y_off, tmp_y_end, tmp_y_first);
-
-	// env->x_off = WIN_W / 2 - (((env->pts[env->dim->w].x_proj - env->pts[env->dim->w * (env->dim->h - 1)].x_proj) * env->zoom) / 2);
-	// env->y_off = (WIN_H / 2) - (((env->pts[env->dim->w * env->dim->h - 1].y_proj - env->pts[0].y_proj) / 2) * env->zoom) + ((env->delta_y * env->zoom) / 2);// - ( / 2 * env->zoom);
+	printf("WIN_H = %i\nenv->delta_y = %f\nenv->zoom = %f\nenv->x_off = %f\nenv->y_off = %f\ntmp_y_end = %f\nenv->pts[env->dim->w * env->dim->h - 1].y_proj = %f\n", WIN_H, env->delta_y, env->zoom, env->x_off, env->y_off, tmp_y_end, env->pts[env->dim->w * env->dim->h - 1].y_proj);
 	ft_project(env);
 	ft_draw_all_lines(env);
 	mlx_key_hook(env->win, ft_key_hook, (void*)env);

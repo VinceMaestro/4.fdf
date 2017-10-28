@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WIN_W		1720
-# define WIN_H		1080
+# define WIN_W		1080
+# define WIN_H		640
 
 # define K_ESC		53
 # define K_QUIT		12
