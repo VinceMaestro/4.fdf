@@ -78,7 +78,7 @@ struct		s_env
 	t_dim		*dim;
 	int			color;
 	float		zoom;
-	float		delta_x;
+	int			pts_y_min;
 	float		delta_y;
 	float		x_off;
 	float		y_off;
