@@ -76,6 +76,11 @@ struct		s_env
 	void		*win;
 	t_pts		*pts;
 	t_dim		*dim;
+	void		*img;
+	char		*data;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
 	int			color;
 	float		zoom;
 	int			pts_y_min;
@@ -113,9 +118,10 @@ struct		s_inf_line
 
 void		fdf(t_env *env);
 int			ft_key_hook(int k, t_env *env);
-int			ft_get_dim(int fd, t_env *env);
-int			ft_get_pts(int fd, t_env *env);
+int			ft_get_input_dim_w_h(int fd, t_env *env);
+int			ft_get_pts_coordinate(int fd, t_env *env);
 void		ft_draw_all_lines(t_env *env);
+void		ft_put_pixel_on_image(t_env *env, float x, float y);
 void		ft_project(t_env *env);
 
 #endif

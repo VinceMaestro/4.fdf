@@ -38,7 +38,7 @@ static void		draw_right_line(t_env *env, t_inf_line *inf)
 			inf->sum -= inf->dx;
 			inf->y += inf->yinc;
 		}
-		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, env->color);
+		ft_put_pixel_on_image(env, inf->x, inf->y);
 		i++;
 	}
 }
@@ -57,7 +57,7 @@ static void		draw_down_line(t_env *env, t_inf_line *inf)
 			inf->sum -= inf->dy;
 			inf->x += inf->xinc;
 		}
-		mlx_pixel_put(env->mlx, env->win, inf->x, inf->y, env->color);
+		ft_put_pixel_on_image(env, inf->x, inf->y);
 		i++;
 	}
 }
@@ -83,10 +83,12 @@ void			ft_draw_all_lines(t_env *env)
 	i = 0;
 	tmp = 0;
 	total = env->dim->h * env->dim->w;
+	env->img = mlx_new_image(env->mlx, WIN_W, WIN_H);
+	env->data = mlx_get_data_addr(env->img, &env->bits_per_pixel, \
+		&env->size_line, &env->endian);
 	while (!env->pts[i].last)
 	{
-		mlx_pixel_put(env->mlx, env->win, env->pts[i].x_proj, \
-			env->pts[i].y_proj, env->color);
+		ft_put_pixel_on_image(env, env->pts[i].x_proj, env->pts[i].y_proj);
 		tmp = (int)env->pts[i].x;
 		if ((tmp + 1) % env->dim->w)
 			draw_one_line(env, i, i + 1);
@@ -95,4 +97,5 @@ void			ft_draw_all_lines(t_env *env)
 			draw_one_line(env, i, i + env->dim->w);
 		i++;
 	}
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 }

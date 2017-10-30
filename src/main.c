@@ -28,11 +28,12 @@ static void		ft_caller_fdf(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1 || !(env = (t_env*)malloc(sizeof(t_env))))
 		fd == -1 ? ft_error("open file () failed \n") : ft_error("Malloc KO\n");
-	if ((ft_get_dim(fd, env) == INVALID) || (ret = close(fd) == -1))
+	if ((ft_get_input_dim_w_h(fd, env) == INVALID) || (ret = close(fd) == -1))
 		ret == -1 ? ft_error("close file () failed \n") : ft_error("Error\n");
 	else if ((fd2 = open(filename, O_RDONLY)) == -1)
 		ft_error("open file () failed \n");
-	else if (ft_get_pts(fd2, env) != VALID || (ret = close(fd2) == -1))
+	else if (ft_get_pts_coordinate(fd2, env) != VALID || \
+		(ret = close(fd2) == -1))
 		ret == -1 ? ft_error("close file () failed \n") : ft_error("Error\n");
 	fdf(env);
 }

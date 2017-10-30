@@ -6,11 +6,12 @@ MLX_FLAGS = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c \
 		fdf.c \
-		ft_get_dim.c \
-		ft_get_pts.c \
+		ft_get_input_dim_w_h.c \
+		ft_get_pts_coordinate.c \
 		ft_project.c \
 		get_next_line.c \
 		ft_draw_all_lines.c \
+		ft_put_pixel_on_image.c \
 		ft_key_hook.c
 
 SRCS = $(addprefix ./src/, $(SRC))

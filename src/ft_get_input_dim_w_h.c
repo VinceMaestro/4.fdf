@@ -12,7 +12,7 @@
 
 #include "../include/fdf.h"
 
-int			ft_get_dim(int fd, t_env *env)
+int			ft_get_input_dim_w_h(int fd, t_env *env)
 {
 	char		*line;
 	char		**args;

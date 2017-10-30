@@ -37,7 +37,7 @@ static void		ft_get_xyz_pos(char **args, t_env *env, int h)
 	}
 }
 
-int				ft_get_pts(int fd, t_env *env)
+int				ft_get_pts_coordinate(int fd, t_env *env)
 {
 	char		*line;
 	char		**args;

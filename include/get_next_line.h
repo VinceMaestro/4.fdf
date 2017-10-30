@@ -32,7 +32,7 @@ struct	s_get_next_line_list
 };
 
 # ifndef BUFF_SIZE
-#  define BUFF_SIZE 8
+#  define BUFF_SIZE 512
 # endif
 
 int		get_next_line(const int fd, char **line);
