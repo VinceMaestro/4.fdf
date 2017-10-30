@@ -6,13 +6,11 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:01:49 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/28 00:51:34 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/30 13:03:02 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-#include <stdio.h>
 
 static void			center_screen(t_env *env)
 {
@@ -41,7 +39,6 @@ static void			get_y_info_for_screen_center(t_env *env)
 			env->pts[i].y_proj : max_y;
 	}
 	env->delta_y = max_y - min_y;
-	// printf("min_y = %f\nmax_y = %f\n", min_y, max_y);
 }
 
 static void			get_def_zoom(t_env *env)
@@ -82,11 +79,6 @@ static void			init_var_and_center_screen(t_env *env)
 	ft_project(env);
 	get_y_info_for_screen_center(env);
 	center_screen(env);
-	// printf("WIN_H = %i\nenv->delta_y = %f\nenv->zoom = %f\n\
-	// env->x_off = %f\nenv->y_off = %f\ntmp_y_end = %f\n\
-	// env->pts[env->dim->w * env->dim->h - 1].y_proj = %f\n", \
-	// WIN_H, env->delta_y, env->zoom, env->x_off, env->y_off, \
-	// tmp_y_end, env->pts[env->dim->w * env->dim->h - 1].y_proj);
 }
 
 void				fdf(t_env *env)
