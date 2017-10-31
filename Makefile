@@ -6,6 +6,7 @@ MLX_FLAGS = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c \
 		fdf.c \
+		ft_init_var_and_center_screen.c \
 		ft_get_input_dim_w_h.c \
 		ft_get_pts_coordinate.c \
 		ft_project.c \

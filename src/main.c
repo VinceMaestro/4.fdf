@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:00:52 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 17:30:26 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/31 16:03:31 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-static void		ft_caller_fdf(char *filename)
+static void		ft_error_checker_fdf_caller(char *filename)
 {
 	int		fd;
 	int		fd2;
@@ -41,7 +41,7 @@ static void		ft_caller_fdf(char *filename)
 int				main(int argc, char **argv)
 {
 	if (argc == 2)
-		ft_caller_fdf(argv[1]);
+		ft_error_checker_fdf_caller(argv[1]);
 	else
 		ft_putstr("usage: ./fdf source_file\n");
 	return (0);

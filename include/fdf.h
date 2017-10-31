@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:03:19 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/30 13:00:08 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/31 15:57:37 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 # define K_B_COL	11
 # define K_PINK_COL	35
 
-# define K_ZOOM_IN	4
-# define K_ZOOM_OUT	5
+# define K_RESET	34
 
 # define K_ZOOM0	18
 # define K_ZOOM1	19
@@ -117,6 +116,7 @@ struct		s_inf_line
 };
 
 void		fdf(t_env *env);
+void		ft_init_var_and_center_screen(t_env *env);
 int			ft_key_hook(int k, t_env *env);
 int			ft_get_input_dim_w_h(int fd, t_env *env);
 int			ft_get_pts_coordinate(int fd, t_env *env);

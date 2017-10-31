@@ -6,7 +6,7 @@
 /*   By: vpetit <vpetit@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:00:24 by vpetit            #+#    #+#             */
-/*   Updated: 2017/10/27 19:29:39 by vpetit           ###   ########.fr       */
+/*   Updated: 2017/10/31 16:21:20 by vpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int					ft_key_hook(int k, t_env *env)
 	int			modif;
 
 	modif = 0;
-	if (!env)
-		ft_error("Error\n");
 	if (k == K_ESC || k == K_QUIT)
 	{
 		mlx_destroy_window(env->mlx, env->win);
@@ -72,9 +70,10 @@ int					ft_key_hook(int k, t_env *env)
 	if ((k == K_LEFT || k == K_RIGHT || k == K_UP || k == K_DOWN) && \
 		(modif++ || 1))
 		updt_offset(env, k);
-	if (modif)
+	if (modif || k == K_RESET)
 	{
 		mlx_clear_window(env->mlx, env->win);
+		(k == K_RESET ? ft_init_var_and_center_screen(env) : NULL);
 		ft_project(env);
 		ft_draw_all_lines(env);
 	}
